@@ -37,6 +37,7 @@ $ git pushor master
 		* [cleanup](#git-cleanup)
 		* [ignore](#git-ignore)
 		* [make](#git-make)
+		* [cl](#git-cl)
 	* [Configuration](#configuration)
 		* [aliases](#git-aliases)
 	* [Staging](#staging)
@@ -148,6 +149,14 @@ This alias lets you chosse a template to init your repository (one of php, defau
 
 ```sh
 $ git make [<initial-commit-message>] (Default: Initial commit) [<template>]
+```
+
+#### git cl
+
+Clones a remote repository and lets you choose a template (one of php, default).
+
+```sh
+$ git cl <url> [<template>]
 ```
 
 ### Configuration
