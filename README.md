@@ -144,9 +144,10 @@ $ git ignore <entry>
 #### git make
 
 Create a new empty repository with an empty initial commit.
+This alias lets you chosse a template to init your repository (one of php, default)
 
 ```sh
-$ git make [<initial-commit-message>] (Default: Initial commit)
+$ git make [<initial-commit-message>] (Default: Initial commit) [<template>]
 ```
 
 ### Configuration
