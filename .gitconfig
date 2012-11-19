@@ -6,6 +6,9 @@
 	user     = <your-github-username>
 	password = <your-github-password>
 
+[gist]
+	browse = 1
+
 [core]
 	editor       = vim
 	pager        = tig
@@ -143,4 +146,4 @@
 	# http://jonas.nitro.dk/tig/
 	t       = !tig
 	# https://github.com/defunkt/gist
-	gst     = gist
+	gist    = !gist

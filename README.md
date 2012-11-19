@@ -43,7 +43,7 @@
 		* [graph](#git-graph)
 	* [Utilities](#utilities)
 		* [g/k/t](#git-gkt)
-		* [gst](#git-gst)
+		* [gist](#git-gist)
 	* [PFlow](#pflow)
 
 ## URLs
@@ -358,13 +358,13 @@ $ git k
 $ git t
 ```
 
-#### git gst
+#### git gist
 Lets you quickly build a Gist
 
 [Checkout git-gist homepage](https://github.com/defunkt/gist)
 
 ```sh
-$ git gst
+$ git gist
 ```
 
 ### PFlow
