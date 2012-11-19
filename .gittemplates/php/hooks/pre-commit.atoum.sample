@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+
+$_SERVER['_'] = '/usr/bin/php';
+
+exec('git diff --cached --name-only --diff-filter=ACMR | grep ".php"', $phpFiles);
+
+if ($phpFilesNumber = sizeof($phpFiles) > 0)
+{
+	echo $phpFilesNumber . ' PHP files staged, launch all unit test...' . PHP_EOL;
+
+	foreach (new \recursiveIteratorIterator(new \recursiveDirectoryIterator(__DIR__ . '/../../')) as $path => $file)
+	{
+		if (substr($path, -4) === '.php' && strpos($path, '/Tests/Units/') !== false)
+		{
+			require_once $path;
+		}
+	}
+}
+
+?>
