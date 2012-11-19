@@ -85,41 +85,43 @@
 
 [alias]
 	# Repository
-	cleanup = !echo 'This will prune origin, run GC and clear stash.\nAre you sure ? (RETURN to continue | CTRL+C to cancel)' && read && git remote prune origin && git gc && git stash clear
+	cleanup = "!f() { echo \"This will prune ${1-origin}, run GC and clear stash.\nAre you sure ? (RETURN to continue | CTRL+C to cancel)\" && read && git remote prune \"${1-origin}\" && git gc && git stash clear; }; f"
 	ignore  = !([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
 	make    = "!f() { git init && git commit --allow-empty -m\"${1-'Initial commit'}\"; }; f"
 
-	# Aliases
+	# Configuration
 	aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
 
 	# Staging
 	addall  = !git add -u && git add . && git ls
-	unadd   = !git reset HEAD --
 	patch   = add --patch
-	
+	unadd   = !git reset HEAD --
+
 	# Commit
 	amend   = commit --amend -C HEAD
 	cp      = cherry-pick -ex
 	undo    = !git reset --soft HEAD~ && git ls
 
-	# Branch
+	# Branching
 	br      = branch -v
 	bra     = !git br -a
 	brr     = !git br -r
 	brn     = !git bra --no-merged
 	cb      = checkout -b
-	finish  = "!f() { BRANCH=$(git pwd); git rebase -i $1 && git checkout $1 && git merge $BRANCH; }; f"
+	pwd     = rev-parse --abbrev-ref HEAD
+
+	# Workflow
 	develop = checkout develop
 	master  = checkout master
-	pwd     = rev-parse --abbrev-ref HEAD
-	go      = "!f() { git branch $1 2>/dev/null; git checkout $1; }; f"
+	go      = "!f() { [ -z $1 ] && echo \"Usage: git go <branch>\" && exit 1; git branch $1 2>/dev/null; git checkout $1; }; f"
+	finish  = "!f() { BRANCH=$(git pwd); git rebase -i $1 && git checkout $1 && git merge $BRANCH; }; f"
 	wip     = "!f() { BRANCH=$(git pwd); (git go wip/$1) && git addall && git commit -m'Work in progress' && git checkout $BRANCH; }; f"
 
 	# Status
 	d       = !git --no-pager diff
 	dc      = !git d --cached
-	stat    = diff --stat
 	st      = !tig status
+	stat    = diff --stat
 	ls      = status --short
 
 	# Remote
