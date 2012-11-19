@@ -38,6 +38,7 @@
 	* [Remote](#remote)
 		* [fetchor/fetchup/pullor/pullup/pushor/pushup](#git-fetchpullpushorup)
 		* [rp](#git-rp)
+		* [radd](#git-radd)
 	* [Log](#log)
 		* [l](#git-l)
 		* [graph](#git-graph)
@@ -323,6 +324,16 @@ Alias for ```git pull --rebase```
 ```sh
 $ git rp <remote> [<branch>]
 ```
+
+#### git radd
+
+Adds a new remote
+
+Alias for ```git remote add```
+
+```sh
+$ git radd <name> <url>
+	```
 
 ### Log
 

@@ -135,6 +135,7 @@
 	pushor  = push origin
 	pushup  = push upstream
 	rp      = pull --rebase
+	radd    = remote add
 
 	# Log
 	l       = !git log | tig -FRSX
