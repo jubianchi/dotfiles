@@ -1,10 +1,11 @@
 [user]
-	name = <your-username>
+	name  = <your-username>
 	email = <your-email>
 
 [github]
-	user = <your-github-username>
+	user     = <your-github-username>
 	password = <your-github-password>
+
 [core]
 	editor       = vim
 	pager        = tig
@@ -20,8 +21,8 @@
 	pager = false
 
 [color "branch"]
-  	current = blue
-  	local   = yellow
+	current = blue
+	local   = yellow
 	remote  = green
 
 [color "status"]
@@ -36,7 +37,7 @@
 	prompt = false
 
 [diff]
-	mnemonicprefix = true	
+	mnemonicprefix = true
 	external       = git-meld
 	# Mac OS x
 	#tool          = Kaleidoscope
@@ -69,8 +70,8 @@
 	insteadOf = "gh:"
 
 [url "git@gist.github.com:"]
-  	insteadOf     = "gists:"
-  	pushInsteadOf = "gists:"
+	insteadOf     = "gists:"
+	pushInsteadOf = "gists:"
 
 [url "git://gist.github.com/"]
 	insteadOf = "gist:"
@@ -80,7 +81,7 @@
 	pushInsteadOf = "bbs:"
 
 [url "https://bitbucket.org/"]
-	insteadOf     = "bb:"
+	insteadOf = "bb:"
 
 [alias]
 	# Repository
@@ -94,18 +95,18 @@
 	# Staging
 	addall  = !git add -u && git add . && git ls
 	unadd   = !git reset HEAD --
-	patch   = add --patch	
+	patch   = add --patch
 	
 	# Commit
 	amend   = commit --amend -C HEAD
 	cp      = cherry-pick -ex
-	undo    = !git reset --soft HEAD~ && git ls	
+	undo    = !git reset --soft HEAD~ && git ls
 
 	# Branch
 	br      = branch -v
-	bra	= !git br -a
-	brr	= !git br -r
-	brn	= !git bra --no-merged
+	bra     = !git br -a
+	brr     = !git br -r
+	brn     = !git bra --no-merged
 	cb      = checkout -b
 	finish  = "!f() { BRANCH=$(git pwd); git rebase -i $1 && git checkout $1 && git merge $BRANCH; }; f"
 	develop = checkout develop
@@ -115,9 +116,9 @@
 	wip     = "!f() { BRANCH=$(git pwd); (git go wip/$1) && git addall && git commit -m'Work in progress' && git checkout $BRANCH; }; f"
 
 	# Status
-	d	= !git --no-pager diff
+	d       = !git --no-pager diff
 	dc      = !git d --cached
-	stat    = diff --stat	
+	stat    = diff --stat
 	st      = !tig status
 	ls      = status --short
 
@@ -128,7 +129,7 @@
 	pullup  = !git rp upstream
 	pushor  = push origin
 	pushup  = push upstream
-	rp      = pull --rebase	
+	rp      = pull --rebase
 
 	# Log
 	l       = !git log | tig -FRSX
@@ -140,4 +141,4 @@
 	# http://jonas.nitro.dk/tig/
 	t       = !tig
 	# https://github.com/defunkt/gist
-	gst	= gist 
+	gst     = gist
