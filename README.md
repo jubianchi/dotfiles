@@ -1,31 +1,7 @@
-# Example usage
+# gitconfig
 
-```sh
-$ mkdir my-repository
-$ git make php
-$ git radd origin ghs:me/my-repository
-$ git pushor master
-$ git go new-feature
-
-# On branch new-feature
-# Commit, commit, commit...
-# Sleep
-
-$ git pullor master
-
-# Commit, commit, commit...
-
-$ git finish master
-
-# Rebase, squash, ...
-# On branch master
-
-$ git pushor master
-
-```
-
-# Aliases
-
+* [Install](#install)
+* [Example](#example)
 * [URLs](#urls)
 	* [ghs:](#ghs)
 	* [gh:](#gh)
@@ -74,6 +50,47 @@ $ git pushor master
 		* [gist](#git-gist)
 	* [PFlow](#pflow)
 	* [Github](#github)
+
+## Install
+
+```sh
+$ git clone git://github.com/jubianchi/gitconfig.git gitconfig
+$ mv gitconfig/* $HOME
+
+$ git config --global user.name <your-username>
+$ git config --global user.email <your-email>
+
+$ git config --global github.user <your-github-username>
+$ git config --global github.password <your-github-password>
+
+$ git aliases
+```
+
+## Example
+
+```sh
+$ mkdir my-repository
+$ git make php
+$ git radd origin ghs:me/my-repository
+$ git pushor master
+$ git go new-feature
+
+# On branch new-feature
+# Commit, commit, commit...
+# Sleep
+
+$ git pullor master
+
+# Commit, commit, commit...
+
+$ git finish master
+
+# Reorder, squash...
+# On branch master
+
+$ git pushor master
+
+```
 
 ## URLs
 
