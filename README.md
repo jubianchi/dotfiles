@@ -70,9 +70,7 @@ $ git aliases
 
 ```sh
 $ mkdir my-repository
-$ git make php
-$ git radd origin ghs:me/my-repository
-$ git pushor master
+$ git cl ghs:me/my-repository php
 $ git go new-feature
 
 # On branch new-feature
@@ -88,6 +86,7 @@ $ git finish master
 # Reorder, squash...
 # On branch master
 
+$ git pullor master
 $ git pushor master
 
 ```
