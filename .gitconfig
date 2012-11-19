@@ -87,7 +87,7 @@
 	# Repository
 	cleanup = !echo 'This will prune origin, run GC and clear stash.\nAre you sure ? (RETURN to continue | CTRL+C to cancel)' && read && git remote prune origin && git gc && git stash clear
 	ignore  = !([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
-	make    = "!f() { git init && git commit --allow-empty -m\"Initial commit\"; }; f"
+	make    = "!f() { git init && git commit --allow-empty -m\"${1-'Initial commit'}\"; }; f"
 
 	# Aliases
 	aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort

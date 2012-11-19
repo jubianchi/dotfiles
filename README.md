@@ -54,10 +54,10 @@ $ git ignore <entry>
 ```
 
 ### git make
-Create a new empty repository with an empty initial commit and a .gitignore file
+Create a new empty repository with an empty initial commit.
 
 ```sh
-$ git make
+$ git make [<initial-commit-message>]
 ```
 
 ### git aliases
