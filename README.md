@@ -182,7 +182,7 @@ $ git master
 $ git develop
 ```
 
-_You could have one alias for each long running branch in your repositories configuration file_
+_You could have one alias for each [long running branch](http://git-scm.com/book/en/Git-Branching-Branching-Workflows#Long-Running-Branches) in your repositories configuration file_
 
 #### git go
 Creates (if it does not exist) and checkout a branch
