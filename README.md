@@ -1,3 +1,29 @@
+# Example usage
+
+```sh
+$ mkdir my-repository
+$ git make php
+$ git radd origin ghs:me/my-repository
+$ git pushor master
+$ git go new-feature
+
+# On branch new-feature
+# Commit, commit, commit...
+# Sleep
+
+$ git pullor master
+
+# Commit, commit, commit...
+
+$ git finish master
+
+# Rebase, squash, ...
+# On branch master
+
+$ git pushor master
+
+```
+
 # Aliases
 
 * [URLs](#urls)

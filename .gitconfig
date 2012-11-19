@@ -51,7 +51,11 @@
 	reflogexpireUnreachable = 100 days
 
 [branch]
+	autosetupmerge  = true
 	autosetuprebase = never
+
+[merge]
+	stat = true
 
 [mergetool]
 	keepBackup = false
