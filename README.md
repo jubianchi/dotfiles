@@ -46,10 +46,12 @@
 		* [g/k/t](#git-gkt)
 		* [gist](#git-gist)
 	* [PFlow](#pflow)
+	* [Github](#github)
 
 ## URLs
 
 ### ghs:
+
 Alias for Github clone URL (SSH protocol) :
 
 ```sh
@@ -58,6 +60,7 @@ $ git clone ghs:jubianchi/atoum
 ```
 
 ### gh:
+
 Alias for Github clone URL (Git readonly protocol) :
 
 ```sh
@@ -66,6 +69,7 @@ $ git clone gh:jubianchi/atoum
 ```
 
 ### gists:
+
 Alias for Gist clone URL (SSH protocol) :
 
 ```sh
@@ -74,6 +78,7 @@ $ git clone gists:a52e82e9ccc25449c325.git
 ```
 
 ### bbs:
+
 Alias for BitBucket clone URL (SSH protocol) :
 
 ```sh
@@ -82,6 +87,7 @@ $ git clone bbs:jubianchi/atoum
 ```
 
 ### bb:
+
 Alias for BitBucket clone URL (HTTPS readonly protocol) :
 
 ```sh
@@ -176,6 +182,7 @@ $ git cp <sha1>
 ```
 
 #### git undo
+
 Resets the last commit keeping the modifications (soft reset) and displays a light status
 
 ```sh
@@ -202,6 +209,7 @@ $ git brn
 ```
 
 #### git cb
+
 Checkout a new branch
 
 Aliases for ```git checkout -b```
@@ -211,6 +219,7 @@ $ git cb <branch>
 ```
 	
 #### git pwd
+
 Displays the name of the current branch
 
 ```sh
@@ -220,6 +229,7 @@ $ git pwd
 ### Workflow
 
 #### git (?:develop|master)
+
 Checkout the develop or master branch
 
 Aliases for ```git checkout```
@@ -232,6 +242,7 @@ $ git develop
 _You could have one alias for each [long running branch](http://git-scm.com/book/en/Git-Branching-Branching-Workflows#Long-Running-Branches) in your repositories configuration file_
 
 #### git go
+
 Creates (if it does not exist) and checkout a branch
 
 ```sh
@@ -247,6 +258,7 @@ $ git finish <branch>
 ```
 
 #### git wip
+
 Starts a WIP branch saving the current moidifications to a new commit and gets you back to your working branch.
 
 ```sh
@@ -256,6 +268,7 @@ $ git wip <branch>
 ### Status
 
 #### git dc?
+
 Aliases for ```git diff``` to bypass pager caveat
 
 ```sh
@@ -338,6 +351,7 @@ $ git radd <name> <url>
 ### Log
 
 #### git l
+
 Alias for ```git log``` to bypass pager caveat
 
 ```sh
@@ -345,6 +359,7 @@ $ git l
 ```
 
 #### git graph
+
 Displays a nice formatted graph
 
 Alias for ```git log```
@@ -356,12 +371,13 @@ $ git graph
 ### Utilities
 
 #### git (?:g|k|t)
+
 Runs usefull git utilities :
 * g : Alias for ```git gui```
 * k : Alias for ```gitk```
 * t : Alias for ```tig```
 
-[Checkout Tig homepage](http://jonas.nitro.dk/tig/)
+[Check out Tig homepage](http://jonas.nitro.dk/tig/)
 
 ```sh
 $ git g
@@ -370,9 +386,10 @@ $ git t
 ```
 
 #### git gist
+
 Lets you quickly build a Gist
 
-[Checkout git-gist homepage](https://github.com/defunkt/gist)
+[Check out git-gist homepage](https://github.com/defunkt/gist)
 
 ```sh
 $ git gist
@@ -380,7 +397,7 @@ $ git gist
 
 ### PFlow
 
-[Checkout PFlow homepage](https://github.com/pmsipilot/pflow)
+[Check out PFlow homepage](https://github.com/pmsipilot/pflow)
 
 ```sh
 $ git feature <start|sync|finish|...>
@@ -390,4 +407,7 @@ $ git ffinish
 $ git fpublish
 ```
 
+### Github
+
+**If you work a lot with Github, check out [defunkt/hub](https://github.com/defunkt/hub)  which is a great tool integrating Github's features to git**
 
