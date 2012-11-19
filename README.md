@@ -1,5 +1,51 @@
 # Aliases
 
+* [URLs](#urls)
+	* [ghs:](#ghs)
+	* [gh:](#gh)
+	* [gists:](#gists)
+	* [bbs:](#bbs)
+	* [bb:](#bb)
+* [Commands](#commands)
+	* [Repository](#repository)
+		* [cleanup](#git-cleanup)
+		* [ignore](#git-ignore)
+		* [make](#git-make)
+	* [Configuration](#configuration)
+		* [aliases](#git-aliases)
+	* [Staging](#staging)
+		* [addall](#git-addall)
+		* [patch](#git-patch)
+		* [unadd](#git-unadd)
+	* [Commit](#commit)
+		* [amend](#git-amend)
+		* [cp](#git-cp)
+		* [undo](#git-undo)
+	* [Branching](#branching)
+		* [br/bra/brr/brn](#git-brarn)
+		* [cb](#git-cb)
+		* [pwd](#git-pwd)
+	* [Workflow](#workflow)
+		* [develop/master](#git-developmaster)
+		* [go](#git-go)
+		* [finish](#git-finish)
+		* [wip](#git-wip)
+	* [Status](#status)
+		* [d/dc](#git-dc)
+		* [stat](#git-stat)
+		* [st](#git-st)
+		* [ls](#git-ls)
+	* [Remote](#remote)
+		* [fetchor/fetchup/pullor/pullup/pushor/pushup](#git-fetchpullpushorup)
+		* [rp](#git-rp)
+	* [Log](#log)
+		* [l](#git-l)
+		* [graph](#git-graph)
+	* [Utilities](#utilities)
+		* [g/k/t](#git-gkt)
+		* [gst](#git-gst)
+	* [PFlow](#pflow)
+
 ## URLs
 
 ### ghs:
@@ -296,8 +342,10 @@ Alias for ```git log```
 $ git graph
 ```
 
+### Utilities
+
 #### git (?:g|k|t)
-Runs uisefull git utilities :
+Runs usefull git utilities :
 * g : Alias for ```git gui```
 * k : Alias for ```gitk```
 * t : Alias for ```tig```
@@ -319,7 +367,7 @@ Lets you quickly build a Gist
 $ git gst
 ```
 
-### PFlow related aliases
+### PFlow
 
 [Checkout PFlow homepage](https://github.com/pmsipilot/pflow)
 
