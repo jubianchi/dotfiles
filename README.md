@@ -2,7 +2,7 @@
 
 ## ZSH Theme
 
-** This theme is highly inspired by [jeremyFreeAgent's Powerline theme](https://github.com/jeremyFreeAgent/oh-my-zsh-powerline-theme) and by [agnoster's one](https://gist.github.com/3712874)**
+**This theme is highly inspired by [jeremyFreeAgent's Powerline theme](https://github.com/jeremyFreeAgent/oh-my-zsh-powerline-theme) and by [agnoster's one](https://gist.github.com/3712874)**
 
 _Here is a quick demo of this theme : http://ascii.io/a/1774_
 
