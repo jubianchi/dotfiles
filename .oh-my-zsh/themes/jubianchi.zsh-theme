@@ -7,7 +7,7 @@
 [ -z "$STATUS_ROOT_SYMBOL" ] && STATUS_ROOT_SYMBOL='⚡'
 [ -z "$STATUS_BACKGROUND_SYMBOL" ] && STATUS_BACKGROUND_SYMBOL='⚙'
 [ -z "$BATTERY_CHARGING_SYMBOL" ] && BATTERY_CHARGING_SYMBOL='⚡'
-[ -z "$VAGRANT_SYMBOL" ] && BATTERY_CHARGING_SYMBOL='ⱱ'
+[ -z "$VAGRANT_SYMBOL" ] && VAGRANT_SYMBOL='ⱱ'
 [ -z "$PHP_VERSION_PATT" ] && PHP_VERSION_PATT='%s'
 [ -z "$GIT_DEFAULT_REMOTE" ] && GIT_DEFAULT_REMOTE='origin'
 [ -z "$GIT_DEFAULT_BRANCH" ] && GIT_DEFAULT_BRANCH='master'
@@ -156,7 +156,7 @@ prompt_vagrant() {
   done
 
   vagrant=""
-  [ -f $dir/Vagrantfile ] && vagrant="ⱱ"
+  [ -f $dir/Vagrantfile ] && vagrant="$VAGRANT_SYMBOL"
 
   bg=red
   [ -f $dir/.vagrant ] && bg=green  
