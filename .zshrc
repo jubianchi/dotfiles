@@ -44,12 +44,12 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 ##
 ## Resty : https://github.com/micha/resty
 ##
-[ $(command -v resty >/dev/null 2>&1) ] && source resty -W
+[ $(command -v resty 2>&1) ] && source resty -W
 
 ##
 ## Hub : https://github.com/defunkt/hub
 ##
-[ $(command -v hub >/dev/null 2>&1) ] && eval "$(hub alias -s)"
+[ $(command -v hub 2>&1) ] && eval "$(hub alias -s)"
 
 ##
 ## Aliases
