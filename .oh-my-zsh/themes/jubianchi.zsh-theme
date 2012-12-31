@@ -141,9 +141,12 @@ prompt_git() {
 prompt_php() {
   local version
 
-  version=`php -v | head -n1 | grep -oi '5.\([3-4]\).\([3-9]\|1[0-9]\{1,\}\)'`
+  if [ $(command -v php) ]
+  then
+    version=`php -ddisplay_errors=stderr -v 2> /dev/null | head -n1 | grep -oi '5.\([3-4]\).\([3-9]\|1[0-9]\{1,\}\)'`
 
-  $1 red white "$(printf $PHP_VERSION_PATT $version)"
+    $1 red white "$(printf $PHP_VERSION_PATT $version)"
+  fi
 }
 
 prompt_vagrant() {
