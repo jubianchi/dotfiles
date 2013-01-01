@@ -1,0 +1,155 @@
+[user]
+	name  = <your-username>
+	email = <your-email>
+
+[github]
+	user     = <your-github-username>
+	password = <your-github-password>
+
+[gist]
+	browse = 1
+
+[core]
+	editor       = vim
+	pager        = tig
+	excludesfile = ~/.gitignore
+
+[pager]
+	diff  = false
+	graph = false
+
+[color]
+	ui    = true
+	diff  = true
+	pager = false
+
+[color "branch"]
+	current = blue
+	local   = yellow
+	remote  = green
+
+[color "status"]
+	added     = green
+	changed   = yellow
+	untracked = red
+
+[difftool "Kaleidoscope"]
+	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+
+[difftool]
+	prompt = false
+
+[diff]
+	mnemonicprefix = true
+	external       = git-meld
+	# Mac OS x
+	#tool          = Kaleidoscope
+
+[gc]
+	auto                    = 0
+	reflogExpire            = never
+	reflogexpireUnreachable = 100 days
+
+[branch]
+	autosetupmerge  = true
+	autosetuprebase = never
+
+[merge]
+	stat = true
+
+[mergetool]
+	keepBackup = false
+
+[push]
+	# Old Git version
+	#default = current
+
+	default = tracking
+
+[help]
+	autocorrect = 1
+
+[url "git@github.com:"]
+	insteadOf     = "ghs:"
+	pushInsteadOf = "ghs:"
+
+[url "git://github.com/"]
+	insteadOf = "gh:"
+
+[url "git@gist.github.com:"]
+	insteadOf     = "gists:"
+	pushInsteadOf = "gists:"
+
+[url "git://gist.github.com/"]
+	insteadOf = "gist:"
+
+[url "git@bitbucket.org:"]
+	insteadOf     = "bbs:"
+	pushInsteadOf = "bbs:"
+
+[url "https://bitbucket.org/"]
+	insteadOf = "bb:"
+
+[alias]
+	# Repository
+	cleanup = "!f() { echo \"This will prune ${1-origin}, run GC and clear stash.\nAre you sure ? (RETURN to continue | CTRL+C to cancel)\" && read && git remote prune \"${1-origin}\" && git gc && git stash clear; }; f"
+	ignore  = !([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
+	make    = "!f() { [ -z $2 ] && git init; [ ! -z $2 ] && git init --template=\"$HOME/$2\" && git commit --allow-empty -m\"${1-'Initial commit'}\"; }; f"
+	cl      = "!f() { [ -z $1 ] && echo \"Usage: git cl <url> [<template>]\" && exit 1; [ -z $2 ] && git clone $1; [ ! -z $2 ] && git clone $1 --template=\"$HOME/.gittemplates/$2\"; }; f"
+
+	# Configuration
+	aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
+
+	# Staging
+	addall  = !git add -u && git add . && git ls
+	patch   = add --patch
+	unadd   = !git reset HEAD --
+
+	# Commit
+	amend   = commit --amend -C HEAD
+	cp      = cherry-pick -ex
+	undo    = !git reset --soft HEAD~ && git ls
+
+	# Branching
+	br      = branch -v
+	bra     = !git br -a
+	brr     = !git br -r
+	brn     = !git bra --no-merged
+	cb      = checkout -b
+	pwd     = rev-parse --abbrev-ref HEAD
+
+	# Workflow
+	develop = checkout develop
+	master  = checkout master
+	go      = "!f() { [ -z $1 ] && echo \"Usage: git go <branch>\" && exit 1; git branch $1 2>/dev/null; git checkout $1; }; f"
+	finish  = "!f() { BRANCH=$(git pwd); git rebase -i $1 && git checkout $1 && git merge $BRANCH; }; f"
+	wip     = "!f() { BRANCH=$(git pwd); (git go wip/$1) && git addall && git commit -m'Work in progress' && git checkout $BRANCH; }; f"
+
+	# Status
+	d       = !git --no-pager diff
+	dc      = !git d --cached
+	st      = !tig status
+	stat    = diff --stat
+	ls      = status --short
+
+	# Remote
+	fetchor = fetch origin
+	fetchup = fetch upstream
+	pullor  = !git rp origin
+	pullup  = !git rp upstream
+	pushor  = push origin
+	pushup  = push upstream
+	rp      = pull --rebase
+	radd    = remote add
+
+	# Log
+	l       = !git log | tig -FRSX
+	graph   = !GIT_PAGER='less -FRSX' git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
+
+	# Utilities
+	g       = gui
+	k       = !gitk --all > /dev/null 2>&1 
+	# http://jonas.nitro.dk/tig/
+	t       = !tig
+	# https://github.com/defunkt/gist
+	gist    = !gist

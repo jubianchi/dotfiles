@@ -1,0 +1,23 @@
+# Vim
+.*.sw[a-z]
+*.un~
+Session.vim
+.netrwhist
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+
+#Mac OSX
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes 
+
+#ST2
+*.sublime-workspace
