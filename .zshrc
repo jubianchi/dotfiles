@@ -23,7 +23,9 @@ export LESS_TERMCAP_us=$'\E[04;33;146m'  # begin underline is now yellow
 ##
 ## ZSH Theme Configuration
 ##
-LEFT_PROMPT=(status context dir php sf2 vagrant git); export LEFT_PROMPT
+source /Users/jubianchi/repositories/jubianchi/phpswitch/.phpswitch/.phpswitchprompt
+
+LEFT_PROMPT=(status context dir phpswitch sf2 vagrant git); export LEFT_PROMPT
 RIGHT_PROMPT=(date battery); export RIGHT_PROMPT
 ZSH_THEME="jubianchi"
 
@@ -52,16 +54,47 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 [ $(command -v hub 2>&1) ] && eval "$(hub alias -s)"
 
 ##
+## phpswitch : https://github.com/jubianchi/phpswitch
+##
+#source /usr/share/phpswitch/.phpswitch/.phpswitchrc
+#php switch on > /dev/null
+
+##
 ## Aliases
 ##
 alias g=git
 alias ll="ls -lThaeFG"
 alias tree="tree -lhF"
 alias which="command -v $1"
-alias zshconfig="$EDITOR ~/.zshrc"
+alias zshconfig="$EDITOR ~/.zshrc"  
+
+if [ ! $(which pbcopy) ]
+then
+    if [ $(which xsel) ] 
+    then
+        alias pbcopy='xsel --clipboard --input'
+        alias pbpaste='xsel --clipboard --output'
+    fi
+
+    if [ $(which xclip) ] 
+    then
+        alias pbcopy='xclip -in -selection c'
+        alias pbpaste='xclip -out -selection c'
+    fi
+fi
+
+if [ $(uname) = "Darwin" ] && [ ! $(which updatedb) ]
+then
+    alias updatedb="/usr/libexec/locate.updatedb"
+fi
 
 ##
 ## Keys
 ##
 bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^S" history-incremental-pattern-search-forward
+bindkey "^P" insert-last-word
+bindkey "[D" backward-word
+bindkey "[C" forward-word
+bindkey "^[a" beginning-of-line
+bindkey "^[e" end-of-line
