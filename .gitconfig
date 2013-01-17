@@ -146,6 +146,12 @@
 	l       = !git log | tig -FRSX
 	graph   = !GIT_PAGER='less -FRSX' git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
 
+        # Github
+	# https://github.com/defunkt/gist
+	gist    = !gist
+	ghinit  = !sh -c 'git config --add 'remote.${1-origin}.fetch' '+refs/pull/*/head:refs/remotes/${1-origin}/pr/*''
+	prstart = !sh -c 'git fetch '${2-origin}' && git checkout pr/$0'
+
 	# Utilities
 	g       = gui
 	k       = !gitk --all > /dev/null 2>&1 
