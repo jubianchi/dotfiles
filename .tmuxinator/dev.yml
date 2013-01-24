@@ -1,0 +1,25 @@
+# ~/.tmuxinator/dev.yml
+# A tmux dev environment with 2 windows:
+#   - The first window has 3 panes:
+#     - Top pane : atoum loop
+#     - Bottom left pane : standard user's shell
+#     - Bottom right pane : vagrant VM
+#   - The second window has 2 panes:
+#     - Top pabne : VIM
+#     - Bottom pane : standard user's shell
+
+project_name: dev
+project_root: .
+socket_name: dev
+tabs:
+  - main:
+      layout: f08c,180x63,0,0[180x30,0,0,180x32,0,31{90x32,0,31,89x32,91,31}]
+      panes:
+        - bin/atoum --test-all --loop --debug -nccfns Symfony
+        - clear
+        - vagrant up; vagrant ssh
+  - editor:
+      layout: main-horizontal
+      panes:
+        - vim
+        - clear
