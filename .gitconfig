@@ -157,5 +157,3 @@
 	k       = !gitk --all > /dev/null 2>&1 
 	# http://jonas.nitro.dk/tig/
 	t       = !tig
-	# https://github.com/defunkt/gist
-	gist    = !gist
