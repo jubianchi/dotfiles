@@ -68,15 +68,18 @@ alias tree="tree -lhF"
 alias which="command -v $1"
 alias zshconfig="$EDITOR ~/.zshrc"  
 
-if [ ! $(which pbcopy) ]
+which pbcopy > /dev/null 2>&1
+if [ ! $? ]
 then
-    if [ $(which xsel) ] 
+    which xsel > /dev/null 2>&1
+    if [ $? ] 
     then
         alias pbcopy='xsel --clipboard --input'
         alias pbpaste='xsel --clipboard --output'
     fi
 
-    if [ $(which xclip) ] 
+    which xclip > /dev/null 2>&1
+    if [ $? ] 
     then
         alias pbcopy='xclip -in -selection c'
         alias pbpaste='xclip -out -selection c'
