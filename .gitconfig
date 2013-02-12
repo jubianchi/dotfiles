@@ -93,7 +93,7 @@
 [alias]
 	# Repository
 	cleanup = "!f() { echo \"This will prune ${1-origin}, run GC and clear stash.\nAre you sure ? (RETURN to continue | CTRL+C to cancel)\" && read && git remote prune \"${1-origin}\" && git gc && git stash clear; }; f"
-	ignore  = "!f() { [ ! -e .gitignore ] && touch .gitignore; echo $1 >> .gitignore; }; f"
+	ignore  = "!f() { [ ! -e .gitignore ] && touch .gitignore; echo \"$1\" >> .gitignore; }; f"
 	make    = "!f() { [ -z $2 ] && git init; [ ! -z $2 ] && git init --template=\"$HOME/$2\" && git commit --allow-empty -m\"${1-'Initial commit'}\"; }; f"
 	cl      = "!f() { [ -z $1 ] && echo \"Usage: git cl <url> [<template>]\" && exit 1; [ -z $2 ] && git clone $1; [ ! -z $2 ] && git clone $1 --template=\"$HOME/.gittemplates/$2\"; }; f"
 
