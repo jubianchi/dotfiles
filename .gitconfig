@@ -98,7 +98,7 @@
 	cl      = "!f() { [ -z $1 ] && echo \"Usage: git cl <url> [<template>]\" && exit 1; [ -z $2 ] && git clone $1; [ ! -z $2 ] && git clone $1 --template=\"$HOME/.gittemplates/$2\"; }; f"
 
 	# Configuration
-	aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
+	aliases = "!git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort"
 
 	# Staging
 	addall  = !git add -u && git add . && git ls
