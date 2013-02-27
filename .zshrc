@@ -69,22 +69,23 @@ alias which="command -v $1"
 alias zshconfig="$EDITOR ~/.zshrc"  
 
 which pbcopy > /dev/null 2>&1
-if [ ! $? ]
+if [[ $? != 0 ]]
 then
     which xsel > /dev/null 2>&1
-    if [ $? ] 
+    if [[ $? == 0 ]]
     then
         alias pbcopy='xsel --clipboard --input'
         alias pbpaste='xsel --clipboard --output'
     fi
 
     which xclip > /dev/null 2>&1
-    if [ $? ] 
+    if [[ $? == 0 ]]
     then
         alias pbcopy='xclip -in -selection c'
         alias pbpaste='xclip -out -selection c'
     fi
 fi
+
 
 if [ $(uname) = "Darwin" ] && [ ! $(which updatedb) ]
 then
