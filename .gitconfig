@@ -144,7 +144,7 @@
 
 	# Log
 	l       = !git log | tig -FRSX
-	ll      = !GIT_PAGER='less -FRSX' git log --date=short --pretty=format:"%Cred%h%Creset%x09%Cgreen%cr%Creset%x09%C(cyan)%an%Creset %s%x09%C(yellow)%d%Creset"
+	ll      = !GIT_PAGER='less -FRSX' git log --date=short --pretty=format:'%Cred%h%Creset%x09%Cgreen%cr%Creset%x09%C(cyan)%an%Creset %s%x09%C(yellow)%d%Creset'
 	graph   = !GIT_PAGER='less -FRSX' git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
 
         # Github
