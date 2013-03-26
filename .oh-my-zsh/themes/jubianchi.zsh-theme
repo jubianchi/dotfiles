@@ -162,11 +162,14 @@ prompt_vagrant() {
   [ -f $dir/Vagrantfile ] && vagrant="$VAGRANT_SYMBOL"
 
   bg=red
-  if [ -f $dir/.vagrant ]
-  then   
-    if [ ! -z "$(cd $dir; vagrant status | grep -o running)" ]
+  if [ -d $dir/.vagrant ]
+  then
+    result=$(cd $dir; vagrant status | grep -o running)
+    if [ ! -z "$result" ]
     then
       bg=green  
+
+      [ $(echo $result | wc -l) -gt 1 ] && vagrant="$vagrant *"
     else
       bg=yellow
     fi
