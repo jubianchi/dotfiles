@@ -95,46 +95,112 @@ prompt_git() {
   local ref dirty hash symbol remote rbranch ahead behind
 
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1)
-  then
-    dirty=$(parse_git_dirty)
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
-    if [[ -n $dirty ]]; then
-      $1 yellow black
-    else
-      $1 green black
-    fi
-    
-    hash=`git log -n1 --pretty="%h"`
-
-    branch="${ref/refs\/heads\//}"
-
-    remote=$(git config branch.$branch.remote)
-    [ -z $remote ] && remote=$GIT_DEFAULT_REMOTE
-
-    rbranch=$(git config branch.$branch.merge)
-    rbranch="${rbranch/refs\/heads\//}"    
-    [ -z $rbranch ] && rbranch=$GIT_DEFAULT_BRANCH
-
-    if [ $(git branch -r | grep -E "^\s*$remote/$branch$") ]
-    then
-      ahead=$(git log --pretty=oneline $remote/$rbranch..$branch | wc -l | tr -d ' ')
-      behind=$(git log --pretty=oneline $branch..$remote/$rbranch | wc -l | tr -d ' ')
-      
-      position=""
-      if [ $ahead -gt 0 -o $behind -gt 0 ]
-      then
-        position="("
-        [ $ahead -gt 0 ] && position="$position↑$ahead"
-        [ $behind -gt 0 ] && position="$position↓$behind"
-        position="$position)"
-      fi    
-    fi
-
-    symbol='⭠'
-    [[ -n $dirty ]] && symbol=$GIT_DIRTY_SYMBOL
-
-    echo -n "$symbol $branch$position@$hash"
+  then	
+		prompt_git_render $1
   fi
+}
+
+prompt_git_render() {
+	$1 $(prompt_git_bg) black "$(prompt_git_symbol) $(prompt_git_branch)$(prompt_git_position)@$(prompt_git_hash)"
+}
+
+CACHE_GIT_SYMBOL=
+prompt_git_symbol() {
+	local topdir mergedir applydir
+
+	if [ -z "$CACHE_GIT_SYMBOL" ]
+	then
+		topdir=$(git rev-parse --git-dir)
+		mergedir="$GIT_DIR"/rebase-merge
+		applydir="$GIT_DIR"/rebase-apply	
+
+		symbol='⭠'
+		if 	[ -d "$mergedir" ] 
+		then
+			symbol='M'
+			[ -f "$mergedir/interactive" ] && symbol='R'
+		fi
+
+		[ -d "$applydir" ] && symbol='A'
+
+		CACHE_GIT_SYMBOL=$symbol
+	fi
+
+	echo -n $CACHE_GIT_SYMBOL
+}
+
+CACHE_GIT_BG=
+prompt_git_bg() {
+	local dirty
+
+	if [ -z "$CACHE_GIT_BG" ]
+	then
+		dirty=$(parse_git_dirty)
+
+		if [[ -n $dirty ]]; then
+			CACHE_GIT_BG=yellow
+		else
+			CACHE_GIT_BG=green
+		fi
+	fi
+
+	echo -n $CACHE_GIT_BG
+}
+
+CACHE_GIT_BRANCH=
+prompt_git_branch() {
+	local ref
+
+	if [ -z "$CACHE_GIT_BRANCH" ]
+	then
+		ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
+		CACHE_GIT_BRANCH="${ref/refs\/heads\//}"
+	fi
+
+	echo -n $CACHE_GIT_BRANCH
+}
+
+CACHE_GIT_HASH=
+prompt_git_hash() {
+	if [ -z "$CACHE_GIT_HASH" ]
+	then
+		CACHE_GIT_HASH=`git log -n1 --pretty="%h"`
+	fi
+
+	echo -n $CACHE_GIT_HASH
+}
+
+CACHE_GIT_POSITION=
+prompt_git_position() {
+	local branch remote rbranch ahead behind position
+
+	if [ -z "$CACHE_GIT_POSITION" ]
+	then
+		branch=$(prompt_git_branch)
+		remote=$(git config branch.$branch.remote)
+		[ -z $remote ] && remote=$GIT_DEFAULT_REMOTE
+
+		rbranch=$(git config branch.$branch.merge)
+		rbranch="${rbranch/refs\/heads\//}"    
+		[ -z $rbranch ] && rbranch=$GIT_DEFAULT_BRANCH
+
+		CACHE_GIT_POSITION=""
+		if [ ! -z "$(git branch -r | grep -E "^\s*$remote/$branch$")" ]
+		then
+			ahead=$(git log --pretty=oneline $remote/$rbranch..$branch | wc -l | tr -d ' ')
+			behind=$(git log --pretty=oneline $branch..$remote/$rbranch | wc -l | tr -d ' ')
+
+			if [ $ahead -gt 0 -o $behind -gt 0 ]
+			then
+				CACHE_GIT_POSITION="("
+				[ $ahead -gt 0 ] && CACHE_GIT_POSITION="$CACHE_GIT_POSITION↑$ahead"
+				[ $behind -gt 0 ] && CACHE_GIT_POSITION="$CACHE_GIT_POSITION↓$behind"
+				CACHE_GIT_POSITION="$CACHE_GIT_POSITION)"
+			fi    
+		fi
+	fi
+
+	echo -n "$CACHE_GIT_POSITION"
 }
 ##
 
