@@ -158,3 +158,12 @@
 	k       = !gitk --all > /dev/null 2>&1 
 	# http://jonas.nitro.dk/tig/
 	t       = !tig
+	
+	# PFlow (https://github.com/pmsipilot/pflow)	
+    	feature  = !pflow feature
+    	fstart   = !git feature start
+    	ffinish  = !git feature finish
+    	fsync    = !git feature sync
+    	fpublish = !git feature publish
+    	rr       = !pflow review request
+        initbase = "!f() { BRANCH=$(git pwd); git config --local branch.$BRANCH.base $1; }; f" 
