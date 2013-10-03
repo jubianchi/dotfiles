@@ -104,7 +104,9 @@
 	addall  = !git add -u && git add . && git ls
 	patch   = add --patch
 	unadd   = !git reset HEAD --
-
+        unchgd  = update-index --assume-unchanged	
+	chgd    = update-index --no-assume-unchanged
+	
 	# Commit
 	amend   = commit --amend -C HEAD
 	cp      = cherry-pick -ex
