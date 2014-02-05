@@ -1,0 +1,12 @@
+export DOTFILES=$(dirname $0)
+
+source $DOTFILES/exports
+
+source $ZSH/oh-my-zsh.sh
+source $ZSH_CUSTOM/custom.sh
+
+source $DOTFILES/functions
+source $DOTFILES/aliases
+source $DOTFILES/tools
+source $DOTFILES/keys
+source $DOTFILES/hooks

@@ -1,0 +1,5 @@
+function chpwd_list_directory() { clear; @ -T8; }
+chpwd_functions=(${chpwd_functions[@]} "chpwd_list_directory")
+
+function chpwd_set_tmux_pwd() { [ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD"; }
+chpwd_functions=(${chpwd_functions[@]} "chpwd_set_tmux_pwd")

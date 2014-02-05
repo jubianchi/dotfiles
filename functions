@@ -1,0 +1,80 @@
+source $DOTFILES/.tmux/powerline/lib/tmux_adapter.sh
+
+realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
+disable_dashboard() {
+    defaults write com.apple.dashboard mcx-disabled -boolean YES && killall Dock
+}
+
+enable_dashboard() {
+    defaults write com.apple.dashboard mcx-disabled -boolean NO && killall Dock
+}
+
+clean_launchpad() {
+    sqlite3 "/Users/jubianchi/Library/Application\ Support/Dock/A14DFEE6-5E34-4A57-A875-1A270780567C.db" "DELETE from apps; DELETE from groups WHERE title <> ''; DELETE from items WHERE rowid>2;" && killall Dock
+}
+
+function dotfiles_update() {
+	$DOTFILES/install.sh $*
+
+	source ~/.zshrc
+}
+
+function dotfiles_link() {
+	FILE=$DOTFILES/$1
+	DEFAULT_LINK=$HOME/$1
+	LINK=${2:-$DEFAULT_LINK}
+
+	if [ "$1" = ".gitconfig" ]
+	then
+		echo "You should not link $FILE."
+		echo "Instead, use include in your .gitconfig:"
+		echo
+		echo "[include]"
+		echo "    path = $DOTFILES/.gitconfig"
+
+		return 1
+	fi
+
+	if [[ "$1" = ".jubianchirc" || "$1" = "aliases" || "$1" = "exports" || "$1" = "functions" || "$1" = "hooks" || "$1" = "keys" || "$1" = "tools" ]]
+	then
+		echo "You should not link $FILE."
+		echo "Instead, source it in your .zshrc:"
+		echo
+		echo "source $DOTFILES/$1"
+
+		return 1
+	fi
+
+	if [[ "$1" = ".git" || "$1" = ".gitmodules" || "$1" = "README.md" || "$1" = "install.sh" || "$1" = ".dir_colors" ]]
+	then
+		echo "File $FILE is not linkable"
+
+		return 2
+	fi
+
+	if [ ! -f $FILE ]
+	then
+		echo "File $FILE does not exist"
+
+		return 2
+	fi
+
+	if [ -L $LINK ]
+	then
+		echo "File $LINK already linked"
+
+		return 2
+	fi
+
+	if [ -f $LINK ]
+	then
+		echo "File $LINK already exists"
+
+		return 2
+	fi
+
+	ln -s $FILE $LINK
+}

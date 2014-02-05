@@ -1,0 +1,49 @@
+export EDITOR="vim"
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+##
+## Manpages
+##
+## https://github.com/sharad/rc/blob/master/LESS_TERMCAP
+export MANPAGER="less -FRX"
+export LESS_TERMCAP_mb=$'\E[01;31m'      # begin blinking
+export LESS_TERMCAP_md=$'\E[01;31m'      # begin bold
+export LESS_TERMCAP_me=$'\E[0m'          # end mode
+export LESS_TERMCAP_se=$'\E[0m'          # end standout-mode
+export LESS_TERMCAP_so=$'\E[01;44;33m'   # begin standout-mode
+export LESS_TERMCAP_ue=$'\E[0m'          # end underline
+export LESS_TERMCAP_us=$'\E[01;32m'      # begin underline
+export LESS_TERMCAP_mb=$'\E[01;31m'      # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m' # bold in blue
+export LESS_TERMCAP_me=$'\E[0m'          # end mode
+export LESS_TERMCAP_se=$'\E[0m'          # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;5;246m'   # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'          # end underline
+export LESS_TERMCAP_us=$'\E[04;33;146m'  # begin underline is now yellow
+
+export ZSH="$DOTFILES/.oh-my-zsh"
+export ZSH_CUSTOM="$DOTFILES/.omz"
+
+##
+## ZSH Theme Configuration
+##
+export DATE_FORMAT="%D{%H:%M:%S}"
+LEFT_PROMPT=(status context date dir sf2); export LEFT_PROMPT
+export DISABLE_RIGHT_PROMPT='false'
+RIGHT_PROMPT=(php nodejs ruby); export RIGHT_PROMPT
+export ZSH_THEME="jubianchi"
+
+##
+## Oh my ZSH Configuration
+##
+export CASE_SENSITIVE="true"
+plugins=(battery osx brew sublime symfony2 brew command-not-found composer emoji-clock git node npm rsync sudo tmux themes vagrant); export plugins
+
+export ZSH_TMUX_AUTOSTART=true
+
+export MANPAGER="less -FRSX"
+export GIT_PAGER=$MANPAGER
+export GREP_OPTIONS="--color=auto"
+export GREP_OPTIONS="--color=auto"
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+

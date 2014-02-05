@@ -1,0 +1,20 @@
+# Default configuration file for tmux-powerline.
+# Modeline {
+#	 vi: foldmarker={,} foldmethod=marker foldlevel=0 tabstop=4 filetype=sh
+# }
+
+# General {	
+	export TMUX_POWERLINE_DEBUG_MODE_ENABLED="false"	
+	export TMUX_POWERLINE_PATCHED_FONT_IN_USE="true"	
+	export TMUX_POWERLINE_THEME="jubianchi"	
+	export TMUX_POWERLINE_DIR_USER_THEMES="$DOTFILES/.tmux/themes"
+	export TMUX_POWERLINE_DIR_USER_SEGMENTS="$DOTFILES/.tmux/segments"
+# }
+
+# date.sh {
+	export TMUX_POWERLINE_SEG_DATE_FORMAT="%a %w %b %Y"
+# }
+
+# time.sh {
+	export TMUX_POWERLINE_SEG_TIME_FORMAT="%H:%M:%S"
+# }
