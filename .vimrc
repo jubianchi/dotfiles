@@ -20,7 +20,7 @@ Bundle 'nathanaelkane/vim-indent-guides'
 ""
 "" Options
 ""
-set guifont=Meslo\ LG\ S\ for\ Powerline:h12
+set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 set encoding=utf-8
 set fileencodings=utf-8
 set fileformats=unix,mac,dos
