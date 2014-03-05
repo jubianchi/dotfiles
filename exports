@@ -30,7 +30,7 @@ export ZSH_CUSTOM="$DOTFILES/.omz"
 export DATE_FORMAT="%D{%H:%M:%S}"
 LEFT_PROMPT=(status context date dir sf2); export LEFT_PROMPT
 export DISABLE_RIGHT_PROMPT='false'
-RIGHT_PROMPT=(php nodejs ruby); export RIGHT_PROMPT
+RIGHT_PROMPT=(php nodejs ruby java); export RIGHT_PROMPT
 export ZSH_THEME="jubianchi"
 
 ##

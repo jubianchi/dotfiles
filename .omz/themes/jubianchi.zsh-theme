@@ -160,6 +160,17 @@ prompt_php() {
   fi
 }
 
+prompt_java() {
+  local version
+
+  if [ -n "$(command -v java)" ]
+  then
+    version=$(java -version 2>&1 | head -n1 | grep -Poie '(?:\d+(?:\.|_)?)+')
+
+    $1 254 160 "java $(printf $VERSION_PATT $version)"
+  fi
+}
+
 prompt_nodejs() {
   local version
 
