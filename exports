@@ -28,7 +28,7 @@ export ZSH_CUSTOM="$DOTFILES/.omz"
 ## ZSH Theme Configuration
 ##
 export DATE_FORMAT="%D{%H:%M:%S}"
-LEFT_PROMPT=(status context date dir sf2); export LEFT_PROMPT
+LEFT_PROMPT=(status context dir sf2); export LEFT_PROMPT
 export DISABLE_RIGHT_PROMPT='false'
 RIGHT_PROMPT=(php nodejs ruby java); export RIGHT_PROMPT
 export ZSH_THEME="jubianchi"
@@ -46,4 +46,6 @@ export GIT_PAGER=$MANPAGER
 export GREP_OPTIONS="--color=auto"
 export GREP_OPTIONS="--color=auto"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+export REPORTTIME=5
 
