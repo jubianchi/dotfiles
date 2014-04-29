@@ -1,0 +1,9 @@
+##
+## Resty : https://github.com/micha/resty
+##
+[ $(command -v resty 2>&1) ] && source resty -W
+
+##
+## Hub : https://github.com/defunkt/hub
+##
+[ $(command -v hub 2>&1) ] && eval "$(hub alias -s)"

@@ -3,12 +3,13 @@
 [ -z "$SEGMENT_SEPARATOR" ] && SEGMENT_SEPARATOR='⮀'
 [ -z "$RSEGMENT_SEPARATOR" ] && RSEGMENT_SEPARATOR='⮂'
 [ -z "$GIT_DIRTY_SYMBOL" ] && GIT_DIRTY_SYMBOL='±'
+[ -z "$STATUS_SUCCESS_SYMBOL" ] && STATUS_SUCCESS_SYMBOL='✔'
 [ -z "$STATUS_ERROR_SYMBOL" ] && STATUS_ERROR_SYMBOL='✘'
 [ -z "$STATUS_ROOT_SYMBOL" ] && STATUS_ROOT_SYMBOL='⚡'
 [ -z "$STATUS_BACKGROUND_SYMBOL" ] && STATUS_BACKGROUND_SYMBOL='⚙'
 [ -z "$BATTERY_CHARGING_SYMBOL" ] && BATTERY_CHARGING_SYMBOL='⚡'
 [ -z "$VAGRANT_SYMBOL" ] && VAGRANT_SYMBOL='ⱱ'
-[ -z "$PHP_VERSION_PATT" ] && PHP_VERSION_PATT='%s'
+[ -z "$VERSION_PATT" ] && VERSION_PATT='%s'
 [ -z "$GIT_DEFAULT_REMOTE" ] && GIT_DEFAULT_REMOTE='origin'
 [ -z "$GIT_DEFAULT_BRANCH" ] && GIT_DEFAULT_BRANCH='master'
 [ -z "$DATE_FORMAT" ] && DATE_FORMAT="%w %D{%b %Y} %D{%H:%M:%S}"
@@ -16,18 +17,20 @@
 
 [ -z "$LEFT_PROMPT" ] && LEFT_PROMPT=(status context dir)
 [ -z "$RIGHT_PROMPT" ] && RIGHT_PROMPT=(date)
+[ -z "$DISABLE_RIGHT_PROMPT" ] && DISABLE_RIGHT_PROMPT='false'
 
 CURRENT_BG='NONE'
 CURRENT_RBG='NONE'
 
 prompt_segment() {
-  local bg fg
+  local bg fg sep
   
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
+  sep=${4:-$SEGMENT_SEPARATOR}
 
   if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
-    echo -n " %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
+    echo -n " %{$bg%F{$CURRENT_BG}%}$sep%{$fg%} "
   else
     echo -n "%{$bg%}%{$fg%} "
   fi
@@ -38,14 +41,15 @@ prompt_segment() {
 }
 
 prompt_rsegment() {
-  local bg fg
+  local bg fg sep
   
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
+  sep=${4:-$RSEGMENT_SEPARATOR}
 
   if [[ $CURRENT_RBG == 'NONE' ]]
   then
-    echo -n "%{%F{$1}%}$RSEGMENT_SEPARATOR%{$fg$bg%} "
+    echo -n "%{%F{$1}%}$sep%{$fg$bg%} "
   else
     echo -n "$RSEGMENT_SEPARATOR"
   fi
@@ -66,27 +70,34 @@ prompt_end() {
 }
 
 prompt_context() {
+  local bg=green
   local user=$DEFAULT_USERNAME
 
+  [[ $RETVAL -ne 0 ]] && bg=red
+
   if [[ "$user" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    $1 black default "%(!.%{%F{yellow}%}.)$user"
+    $1 $bg 254 "$user"
   fi
 }
 
 ## Standard prompt informations
 prompt_dir() {
-  $1 blue black '%~'
+  $1 33 254 '%~'
 }
 
 prompt_status() {
+  local bg=green
   local symbols
 
-  symbols=()
-  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}$STATUS_ERROR_SYMBOL"
-  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}$STATUS_ROOT_SYMBOL"
-  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}$STATUS_BACKGROUND_SYMBOL"
+  [[ $RETVAL -ne 0 ]] && bg=red 
 
-  [[ -n "$symbols" ]] && $1 black default "$symbols"
+  symbols=()
+  [[ $RETVAL -ne 0 ]] && symbols+="$STATUS_ERROR_SYMBOL"
+  [[ $RETVAL -eq 0 ]] && symbols+="$STATUS_SUCCESS_SYMBOL"
+  [[ $UID -eq 0 ]] && symbols+="$STATUS_ROOT_SYMBOL"
+  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="$STATUS_BACKGROUND_SYMBOL"
+
+  [[ -n "$symbols" ]] && $1 $bg 254 "$symbols ⮁"
 }
 ##
 
@@ -141,11 +152,44 @@ prompt_git() {
 prompt_php() {
   local version
 
-  if [ $(command -v php) ]
+  if [ -n "$(command -v php)" ]
   then
-    version=`php -ddisplay_errors=stderr -v 2> /dev/null | head -n1 | grep -oi '5.\([3-4]\).\([3-9]\|1[0-9]\{1,\}\)'`
+    version=`php -ddisplay_errors=stderr -v 2> /dev/null | head -n1 | grep -Poie '5(?:\.\d+)+'`
 
-    $1 red white "$(printf $PHP_VERSION_PATT $version)"
+    $1 33 254 "php $(printf $VERSION_PATT $version)"
+  fi
+}
+
+prompt_java() {
+  local version
+
+  if [ -n "$(command -v java)" ]
+  then
+    version=$(java -version 2>&1 | head -n1 | grep -Poie '(?:\d+(?:\.|_)?)+')
+
+    $1 254 160 "java $(printf $VERSION_PATT $version)"
+  fi
+}
+
+prompt_nodejs() {
+  local version
+
+  if [ -n "$(command -v node)" ]
+  then
+    version=`node -v 2> /dev/null | head -n1 | grep -Poie '(?:\d+\.?)+'`
+
+    $1 64 254 "nodejs $(printf $VERSION_PATT $version)"
+  fi
+}
+
+prompt_ruby() {
+  local version
+
+  if [ -n "$(command -v ruby)" ]
+  then
+    version=`ruby -v 2> /dev/null | head -n1 | grep -Poie '(ruby [^\s]+)'`
+
+    $1 160 254 "$version"
   fi
 }
 
@@ -183,7 +227,7 @@ prompt_sf2() {
 
   if [ -e app/console ]
   then
-    $1 cyan white "SF2"
+    $1 cyan 254 "SF2"
   fi
 }
 
@@ -191,9 +235,9 @@ prompt_battery() {
   local total remain pct bg charging
 
   if [[ $(uname) == "Darwin" ]] ; then
-    total=$(ioreg -l | grep Capacity | grep -E '"MaxCapacity" = \d+' | grep -E '[0-9]+' -o)
-    remain=$(ioreg -l | grep Capacity | grep -E '"CurrentCapacity" = \d+' | grep -E '[0-9]+' -o)
-
+    total=$(ioreg -l | grep Capacity | grep -P '"MaxCapacity" = \d+' | grep -P '[0-9]+' -o)
+    remain=$(ioreg -l | grep Capacity | grep -P '"CurrentCapacity" = \d+' | grep -P '[0-9]+' -o)
+    
     pct=$(php -r"echo round(${remain}/${total}*100);")
 
     if [ $(ioreg -rc AppleSmartBattery | grep -c '^.*"ExternalConnected"\ =\ No') -eq 0 ]
@@ -214,7 +258,7 @@ prompt_battery() {
 }
 
 prompt_date() {
-  $1 blue white $DATE_FORMAT
+  $1 243 254 $DATE_FORMAT
 }
 
 prompt_screen() {
@@ -258,4 +302,10 @@ build_rprompt() {
 
 PROMPT='%{%f%b%k%}$(build_prompt)
 $(build_cmd_prompt)%{%f%k%b%} '
-RPROMPT='%{%f%b%k%}$(build_rprompt)'
+
+if [ $DISABLE_RIGHT_PROMPT = 'false' ]
+then
+  RPROMPT='%{%f%b%k%}$(build_rprompt)'
+else
+  RPROMPT=''
+fi

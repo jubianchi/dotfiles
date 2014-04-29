@@ -1,0 +1,25 @@
+alias @=l
+alias f="open ${1:-.}" 
+alias g=git
+alias l="gls --color"
+alias q="quick-look $@ >/dev/null 2>&1"
+alias t=tig
+
+alias @@=ll
+alias hl="highlight --out-format xterm256 --style rdark --syntax"
+alias ll="l -lT4 -hAFG"
+alias sl=l
+
+alias ssh='TERM=xterm ssh'
+
+alias md5sum=md5
+
+alias tree="tree -lhF"
+alias nyan="telnet nyancat.dakko.us 23"
+
+alias zshrc="$EDITOR ~/.zshrc && source ~/.zshrc"
+
+if [[ $(uname) = "Darwin" && $(which updatedb) != "" ]]
+then
+    alias updatedb="/usr/libexec/locate.updatedb"
+fi
