@@ -16,6 +16,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'vim-scripts/taglist.vim'
 
 ""
 "" Options
@@ -101,6 +102,12 @@ augroup gitgutter_style
 	autocmd VimEnter,Colorscheme * :highlight GitGutterChange ctermfg=136 ctermbg=0 guifg=#af8700 guibg=#073642
 	autocmd VimEnter,Colorscheme * :highlight GitGutterChangeDelete ctermfg=160 ctermbg=0 guifg=#d70000 guibg=#073642
 augroup END
+
+""
+"" Tags
+""
+let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+
 
 ""
 "" EasyMotion

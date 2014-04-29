@@ -3,9 +3,9 @@
 DOTFILES_TARGET_DIR=${DOTFILES_TARGET_DIR-$HOME/.dotfiles}
 DOTFILES_TARGET_DIR=${1-$DOTFILES_TARGET_DIR}
 
-for package in "coreutils git reattach-to-user-namespace homebrew/dupes/grep openssl tmux highlight tig"
+for package in "coreutils git reattach-to-user-namespace homebrew/dupes/grep openssl tmux highlight tig ctags"
 do
-	brew install $package
+	brew install $package --default-names
 done
 
 if [ ! -d "$DOTFILES_TARGET_DIR" ]
