@@ -4,3 +4,6 @@ cask install caffeine
 cask install google-chrome
 cask install vagrant
 cask install iterm2
+cask install boot2docker 
+cask install virtualbox 
+
