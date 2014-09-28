@@ -49,3 +49,4 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 export REPORTTIME=5
 
+export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/etc/Caskroom"

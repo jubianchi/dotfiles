@@ -1,0 +1,12 @@
+install zsh
+install vim
+install htop
+install git
+install coreutils 
+install reattach-to-user-namespace 
+install homebrew/dupes/grep 
+install openssl 
+install tmux 
+install highlight 
+install tig 
+install ctags

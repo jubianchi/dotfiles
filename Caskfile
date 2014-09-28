@@ -1,0 +1,6 @@
+install caskroom/cask/brew-cask
+
+cask install caffeine
+cask install google-chrome
+cask install vagrant
+cask install iterm2
