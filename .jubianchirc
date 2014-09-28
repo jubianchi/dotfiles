@@ -1,4 +1,4 @@
-export DOTFILES=$(dirname $0)
+export DOTFILES=$(cd "$(dirname $0)"; pwd)
 
 source $DOTFILES/exports
 

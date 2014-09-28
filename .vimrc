@@ -21,7 +21,7 @@ Bundle 'vim-scripts/taglist.vim'
 ""
 "" Options
 ""
-set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+"" set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 set encoding=utf-8
 set fileencodings=utf-8
 set fileformats=unix,mac,dos
@@ -80,6 +80,18 @@ let g:airline_section_b = airline#section#create(['hunks'])
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
 
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
+
 ""
 "" Solarized
 ""
@@ -95,7 +107,7 @@ let g:gitgutter_enabled=1
 let g:gitgutter_sign_removed='-'
 let g:gitgutter_sign_modified_removed='-~'
 augroup gitgutter_style
-	autocmd!	
+	autocmd!
 	autocmd VimEnter,Colorscheme * :highlight SignColumn ctermfg=8 ctermbg=0 guifg=#000000 guibg=#073642
 	autocmd VimEnter,Colorscheme * :highlight GitGutterAdd ctermfg=64 ctermbg=0 guifg=#5f8700 guibg=#073642
 	autocmd VimEnter,Colorscheme * :highlight GitGutterDelete ctermfg=160 ctermbg=0 guifg=#d70000 guibg=#073642
