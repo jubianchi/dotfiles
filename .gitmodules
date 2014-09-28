@@ -13,3 +13,6 @@
 [submodule ".vim/bundle/vundle"]
 	path = .vim/bundle/vundle
 	url = https://github.com/gmarik/vundle.git
+[submodule ".iterm/colors"]
+	path = .iterm/colors
+	url = https://github.com/mbadolato/iTerm2-Color-Schemes.git
