@@ -49,5 +49,5 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 export REPORTTIME=5
 
-export DOCKER_HOST=tcp://$(/usr/local/bin/boot2docker ip 2>/dev/null):2375
+eval $(boot2docker shellinit 2>/dev/null)
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/etc/Caskroom"
