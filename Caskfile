@@ -4,8 +4,11 @@ cask install caffeine
 cask install google-chrome
 cask install vagrant
 cask install iterm2
-cask install boot2docker 
-cask install virtualbox 
-cask install java 
+cask install boot2docker
+cask install virtualbox
+cask install java
 cask install spotify
+cask install atom
+cask install phpstorm
+cask install rubymine
 
