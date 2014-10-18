@@ -24,7 +24,7 @@ CURRENT_RBG='NONE'
 
 prompt_segment() {
   local bg fg sep
-  
+
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
   sep=${4:-$SEGMENT_SEPARATOR}
@@ -34,15 +34,15 @@ prompt_segment() {
   else
     echo -n "%{$bg%}%{$fg%} "
   fi
-  
+
   CURRENT_BG=$1
-  
+
   [[ -n $3 ]] && echo -n $3
 }
 
 prompt_rsegment() {
   local bg fg sep
-  
+
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
   sep=${4:-$RSEGMENT_SEPARATOR}
@@ -55,7 +55,7 @@ prompt_rsegment() {
   fi
 
   CURRENT_BG=$1
-  
+
   [[ -n $3 ]] && echo -n "$3 "
 }
 
@@ -89,7 +89,7 @@ prompt_status() {
   local bg=green
   local symbols
 
-  [[ $RETVAL -ne 0 ]] && bg=red 
+  [[ $RETVAL -ne 0 ]] && bg=red
 
   symbols=()
   [[ $RETVAL -ne 0 ]] && symbols+="$STATUS_ERROR_SYMBOL"
@@ -114,7 +114,7 @@ prompt_git() {
     else
       $1 green black
     fi
-    
+
     hash=`git log -n1 --pretty="%h"`
 
     branch="${ref/refs\/heads\//}"
@@ -123,14 +123,14 @@ prompt_git() {
     [ -z $remote ] && remote=$GIT_DEFAULT_REMOTE
 
     rbranch=$(git config branch.$branch.merge)
-    rbranch="${rbranch/refs\/heads\//}"    
+    rbranch="${rbranch/refs\/heads\//}"
     [ -z $rbranch ] && rbranch=$GIT_DEFAULT_BRANCH
 
     if [ $(git branch -r | grep -E "^\s*$remote/$branch$") ]
     then
       ahead=$(git log --pretty=oneline $remote/$rbranch..$branch | wc -l | tr -d ' ')
       behind=$(git log --pretty=oneline $branch..$remote/$rbranch | wc -l | tr -d ' ')
-      
+
       position=""
       if [ $ahead -gt 0 -o $behind -gt 0 ]
       then
@@ -138,7 +138,7 @@ prompt_git() {
         [ $ahead -gt 0 ] && position="$position↑$ahead"
         [ $behind -gt 0 ] && position="$position↓$behind"
         position="$position)"
-      fi    
+      fi
     fi
 
     symbol='⭠'
@@ -198,7 +198,7 @@ prompt_vagrant() {
 
   dir=.
   while [ -d $dir -a ! -f $dir/Vagrantfile ]
-  do    
+  do
     dir=$dir/..
   done
 
@@ -211,7 +211,7 @@ prompt_vagrant() {
     result=$(cd $dir; vagrant status | grep -o running)
     if [ ! -z "$result" ]
     then
-      bg=green  
+      bg=green
 
       [ $(echo $result | wc -l) -gt 1 ] && vagrant="$vagrant *"
     else
@@ -237,7 +237,7 @@ prompt_battery() {
   if [[ $(uname) == "Darwin" ]] ; then
     total=$(ioreg -l | grep Capacity | grep -P '"MaxCapacity" = \d+' | grep -P '[0-9]+' -o)
     remain=$(ioreg -l | grep Capacity | grep -P '"CurrentCapacity" = \d+' | grep -P '[0-9]+' -o)
-    
+
     pct=$(php -r"echo round(${remain}/${total}*100);")
 
     if [ $(ioreg -rc AppleSmartBattery | grep -c '^.*"ExternalConnected"\ =\ No') -eq 0 ]
@@ -271,7 +271,7 @@ prompt_screen() {
 
   detached=0
   [ $(echo $list | wc -l) -gt 2 ] && detached=$(echo $list | tail -n +2 | head -n -2 | grep Detached | wc -l)
-  
+
   dead=0
   [ $(echo $list | wc -l) -gt 2 ] && dead=$(echo $list | tail -n +2 | head -n -2 | grep Dead | wc -l)
 
@@ -280,6 +280,20 @@ prompt_screen() {
     prompt_rsegment red black "Screen A$attached/D$detached/W$dead"
   else
     prompt_rsegment yellow black "Screen A$attached/D$detached"
+  fi
+}
+
+prompt_load() {
+  local load cpus
+
+  load=$(sysctl -n vm.loadavg | cut -d' ' -f3 | sed s/,/./ | sed 's/.\{1\}$//')
+  cpus=$(sysctl hw.ncpu | cut -d' ' -f2)
+
+  if [ "$(echo "$load>(0.70*$cpus)" | bc)" -eq "1" ]
+  then
+    $1 red white $load
+  else
+    $1 green white $load
   fi
 }
 
