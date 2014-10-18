@@ -1,5 +1,5 @@
 alias @=l
-alias f="open ${1:-.}" 
+alias f="open ${1:-.}"
 alias g=git
 alias l="gls --color"
 alias q="quick-look $@ >/dev/null 2>&1"
@@ -23,3 +23,4 @@ if [[ $(uname) = "Darwin" && $(which updatedb) != "" ]]
 then
     alias updatedb="/usr/libexec/locate.updatedb"
 fi
+
