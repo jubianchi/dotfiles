@@ -21,3 +21,6 @@ Icon
 
 #ST2
 *.sublime-workspace
+
+#Vagrant
+.vagrant/

@@ -118,6 +118,10 @@
 	go      = "!f() { [ -z $1 ] && echo \"Usage: git go <branch>\" && exit 1; git branch $1 2>/dev/null; git checkout $1; }; f"
 	finish  = "!f() { BRANCH=$(git pwd); git rebase -i $1 && git checkout $1 && git merge $BRANCH; }; f"
 	wip     = "!f() { BRANCH=$(git pwd); (git go wip/$1) && git addall && git commit -m'Work in progress' && git checkout $BRANCH; }; f"
+	stashstash = "!f() { STASH=$(git stash); echo \"\\033[0;31mKouroukoukou roukoukou stash stash\\033[0m\"; echo \"$STASH\"; xdg-open \"http://www.youtube.com/watch?v=LpE1bJp8-4w&feature=youtu.be&t=47s\" > /dev/null 2>&1 & }; f"
+	satsh = !git stashstash
+	stach = !git satsh
+	sa = !git satsh
 
 	# Status
 	d       = !git --no-pager diff
@@ -132,6 +136,7 @@
 	pullor  = !git rp origin
 	pullup  = !git rp upstream
 	pushor  = push origin
+	pousse  = push
 	pushup  = push upstream
 	rp      = pull --rebase
 	radd    = remote add
