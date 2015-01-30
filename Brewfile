@@ -25,3 +25,4 @@ install tmux
 install highlight 
 install tig 
 install ctags
+install go

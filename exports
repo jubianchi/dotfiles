@@ -51,3 +51,7 @@ export REPORTTIME=5
 
 eval $(boot2docker shellinit 2>/dev/null)
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/etc/Caskroom"
+
+export GOPATH=$HOME/.go
+export PATH=$PATH:$GOPATH/bin
+
