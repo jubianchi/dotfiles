@@ -78,3 +78,14 @@ function dotfiles_link() {
 
 	ln -s $FILE $LINK
 }
+
+capture() {
+    local FILE
+
+    FILE=$(mktemp -t capture).png
+
+    screencapture -t png $* $FILE
+    open -a Preview $FILE
+
+    echo $FILE
+}
