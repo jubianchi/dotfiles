@@ -26,3 +26,4 @@ install highlight
 install tig 
 install ctags
 install go
+install gnu-tar

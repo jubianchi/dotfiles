@@ -105,7 +105,7 @@
 	undo    = !git reset --soft HEAD~ && git ls
 
 	# Branching
-	br      = branch -v
+	br      = "!f() { git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset)|%(color:red)%(objectname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))|%(contents:subject)|%(authorname)' | column -ts'|'; }; f"
 	bra     = !git br -a
 	brr     = !git br -r
 	brn     = !git bra --no-merged

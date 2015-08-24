@@ -24,3 +24,6 @@ then
     alias updatedb="/usr/libexec/locate.updatedb"
 fi
 
+alias webserver="python -m SimpleHTTPServer "
+
+alias fig="docker-compose"
