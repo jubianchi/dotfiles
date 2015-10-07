@@ -1,4 +1,8 @@
+DOTFILES_TMP_ORIGINAL_chpwd_functions=(${chpwd_functions[@]})
+export chpwd_functions=()
 export DOTFILES=$(cd "$(dirname $0)"; pwd)
+export chpwd_functions=(${DOTFILES_TMP_ORIGINAL_chpwd_functions[@]})
+unset DOTFILES_TMP_ORIGINAL_chpwd_functions
 
 source $DOTFILES/exports
 

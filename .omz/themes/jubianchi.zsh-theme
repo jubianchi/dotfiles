@@ -154,7 +154,7 @@ prompt_php() {
 
   if [ -n "$(command -v php)" ]
   then
-    version=`php -ddisplay_errors=stderr -v 2> /dev/null | head -n1 | grep -Poie '5(?:\.\d+)+'`
+    version=`php -ddisplay_errors=stderr -v 2> /dev/null | head -n1 | grep -Poie '\d(?:\.\d+)+'`
 
     $1 33 254 "php $(printf $VERSION_PATT $version)"
   fi
