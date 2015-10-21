@@ -89,3 +89,12 @@ capture() {
 
     echo $FILE
 }
+
+leave_me_alone() {
+    launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist && \
+    sudo killall -9 NotificationCenter
+}
+
+ping_me() {
+    launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+}
