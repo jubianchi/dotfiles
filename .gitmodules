@@ -16,3 +16,6 @@
 [submodule ".iterm/colors"]
 	path = .iterm/colors
 	url = https://github.com/mbadolato/iTerm2-Color-Schemes.git
+[submodule "emoji-cli"]
+	path = emoji-cli
+	url = https://github.com/Pym/emoji-cli.git

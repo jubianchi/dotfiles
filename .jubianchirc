@@ -14,3 +14,4 @@ source $DOTFILES/aliases
 source $DOTFILES/tools
 source $DOTFILES/keys
 source $DOTFILES/hooks
+source $DOTFILES/emoji-cli/emoji-cli.zsh
